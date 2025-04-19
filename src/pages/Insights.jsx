@@ -1,4 +1,3 @@
-// File: src/pages/Insights.jsx
 import React from "react";
 import { useData } from "../context/DataContext";
 import SummaryStats from "../components/insights/SummaryStats";
@@ -24,7 +23,7 @@ export default function Insights() {
     return <p className="text-red-500 text-center mt-10">{error}</p>;
   }
 
-  // Helper to get the top key and its count for any field
+  
   const getTopEntry = (field) => {
     const counts = csvData.reduce((acc, row) => {
       const key = row[field];

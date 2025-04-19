@@ -1,4 +1,3 @@
-// components/LoadingSpinner.jsx
 import React from "react";
 
 function LoadingSpinner({ text = "Loading...", overlay = false }) {

@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import loadCSVData from "../utils/loadCSVData.js"; 
+import loadCSVData from "../utils/loadCSVData.js";
 
 const DataContext = createContext();
 
@@ -32,4 +32,4 @@ const DataProvider = ({ children }) => {
     </DataContext.Provider>
   );
 };
-export{ DataProvider, useData };
+export { DataProvider, useData };
