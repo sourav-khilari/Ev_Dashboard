@@ -25,7 +25,7 @@ function StackedVehicleTypeTrendChart({ data }) {
     });
 
     const chartData = Object.values(yearTypeMap).sort((a, b) => a.year - b.year);
-    
+
     if (chartData.length === 0) {
         return <p className="text-center text-sm text-red-500">No valid data to display.</p>;
     }
@@ -45,6 +45,7 @@ function StackedVehicleTypeTrendChart({ data }) {
                         }}
                     />
                     <YAxis
+                        width={50}
                         label={{
                             value: "Number of EVs",
                             angle: -90,
@@ -52,6 +53,7 @@ function StackedVehicleTypeTrendChart({ data }) {
                             offset: 10,
                             fontSize: 14,
                             fontWeight: 500,
+                            dx:-20,
                         }}
                     />
 

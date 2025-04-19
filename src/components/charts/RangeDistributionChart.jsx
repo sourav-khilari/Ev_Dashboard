@@ -13,7 +13,7 @@ function RangeDistributionChart({ data }) {
         ).length;
         return { range: `${start}-${end === Infinity ? '+' : end}`, count };
     });
-   
+
     return (
         <ResponsiveContainer width="100%" height={300}>
             <BarChart data={bucketCounts} margin={{ top: 10, right: 20, bottom: 40, left: 30 }}>
@@ -23,7 +23,7 @@ function RangeDistributionChart({ data }) {
                     label={{ value: 'Electric Range (mi)', position: 'insideBottom', offset: -5 }}
                 />
                 <YAxis
-                    label={{ value: 'Vehicle Count', angle: -90, position: 'insideLeft', offset: 10 }}
+                    label={{ value: 'Vehicle Count', angle: -90, position: 'insideLeft', offset: 10,dx:-20, }}
                 />
                 <Tooltip />
                 <Bar dataKey="count" fill="#10b981" radius={[4, 4, 0, 0]} />
