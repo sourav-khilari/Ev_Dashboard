@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from './Navbar.jsx';
+import Navbar from '../components/NavBar.jsx';
 import { Outlet } from "react-router-dom";
 import  {DataProvider}  from "../context/DataContext.jsx";
 import Footer from "../components/Footer.jsx";
