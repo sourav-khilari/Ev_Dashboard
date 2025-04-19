@@ -59,7 +59,7 @@ function Dashboard() {
             </ChartSection>
           </div>
       
-          {/* 2. Vehicle Type & Makes Breakdown */}
+          
           <div className="grid gap-8 grid-cols-1 lg:grid-cols-2">
             <ChartSection title="Electric Vehicle Types (BEV vs. PHEV)">
               <VehicleTypeChart data={filteredData} />
@@ -69,7 +69,7 @@ function Dashboard() {
             </ChartSection>
           </div>
       
-          {/* 3. Performance & Eligibility */}
+         
           <div className="grid gap-8 grid-cols-1 lg:grid-cols-2">
             <ChartSection title="Electric Range Distribution">
               <RangeDistributionChart data={filteredData} />
@@ -79,7 +79,7 @@ function Dashboard() {
             </ChartSection>
           </div>
       
-          {/* 4. Geographic Distribution */}
+          
           <div className="grid gap-8 grid-cols-1 lg:grid-cols-2">
             <ChartSection title="Top Cities by EV Count">
               <TopCitiesChart data={filteredData} />
