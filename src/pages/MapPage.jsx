@@ -20,7 +20,6 @@ function MapPage() {
     setYearRange([2010, 2024]);
   };
 
-  // Debounced filter logic
   useEffect(() => {
     if (!csvData || csvData.length === 0) return;
 
@@ -41,7 +40,7 @@ function MapPage() {
 
       setFilteredData(result);
       setMarkersLoading(false);
-    }, 100); // gives the browser a breath before filtering large data
+    }, 100);
 
     return () => clearTimeout(timeout);
   }, [csvData, selectedMake, yearRange]);
@@ -76,7 +75,7 @@ function MapPage() {
       />
 
       <div className="relative h-[70vh] rounded-xl overflow-hidden shadow-lg">
-        {/* Overlay spinner only when markers are loading */}
+
         {markersLoading && (
           <div className="absolute inset-0 z-[100] bg-white/60 dark:bg-black/30 flex items-center justify-center pointer-events-none">
             <LoadingSpinner text="Updating map..." />
@@ -114,7 +113,6 @@ function MapPage() {
           ))}
         </MapContainer>
 
-        {/* Legend */}
         <div className="absolute bottom-4 left-4 bg-white dark:bg-gray-800 text-gray-800 dark:text-white p-4 rounded-lg shadow-lg text-xs space-y-2 z-10">
           <p className="font-semibold">Legend: Circle Size</p>
           <div className="flex items-center space-x-2">

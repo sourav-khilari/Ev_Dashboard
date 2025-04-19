@@ -35,67 +35,6 @@ function Dashboard() {
     if (error)
         return <p className="text-red-500 text-center mt-20">{error}</p>;
 
-    // return (
-    //     <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8 space-y-10">
-    //         <h1 className="text-3xl font-extrabold text-center text-gray-900 dark:text-white">
-    //             📊 Dashboard Insights
-    //         </h1>
-
-
-    //         <FilterBar
-    //             originalData={csvData}
-    //             selectedMake={selectedMake}
-    //             setSelectedMake={setSelectedMake}
-    //             yearRange={yearRange}
-    //             setYearRange={setYearRange}
-    //             onReset={resetFilters}
-    //         />
-
-
-    //         <div className="grid gap-8 grid-cols-1 lg:grid-cols-2">
-    //             <ChartSection title="EVs by Model Year">
-    //                 <YearlyTrendChart data={filteredData} />
-    //             </ChartSection>
-    //             <ChartSection title="Top 5 Vehicle Makes">
-    //                 <TopMakesChart data={filteredData} />
-    //             </ChartSection>
-    //         </div>
-
-    //         <div className="grid gap-8 grid-cols-1 lg:grid-cols-2">
-    //             <ChartSection title="Electric Range Distribution">
-    //                 <RangeDistributionChart data={filteredData} />
-    //             </ChartSection>
-    //             <ChartSection title="Electric Vehicle Types (BEV vs. PHEV)">
-    //                 <VehicleTypeChart data={filteredData} />
-    //             </ChartSection>
-    //         </div>
-
-    //         <div className="grid gap-8 grid-cols-1 lg:grid-cols-2">
-    //             <ChartSection title="CAFV Eligibility Status">
-    //                 <CafvEligibilityChart data={filteredData} />
-    //             </ChartSection>
-    //             <ChartSection title="Top Cities by EV Count">
-    //                 <TopCitiesChart data={filteredData} />
-    //             </ChartSection>
-    //         </div>
-
-    //         <div className="grid gap-8 grid-cols-1 lg:grid-cols-2">
-    //             <ChartSection title="Top Electric Utilities by EV Count">
-    //                 <TopElectricUtilitiesChart data={filteredData} />
-    //             </ChartSection>
-    //             <ChartSection title="EVs by Legislative District">
-    //                 <TopLegislativeDistrictsChart data={filteredData} />
-    //             </ChartSection>
-    //         </div>
-
-    //         <div className="grid gap-8 grid-cols-1 lg:grid-cols-2">
-    //             <ChartSection title="BEV vs PHEV Over Years">
-    //                 <StackedVehicleTypeTrendChart data={filteredData} />
-    //             </ChartSection>
-    //         </div>
-    //     </div>
-    // );
-
     return (
         <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8 space-y-10">
           <h1 className="text-3xl font-extrabold text-center text-gray-900 dark:text-white">
@@ -111,7 +50,6 @@ function Dashboard() {
             onReset={resetFilters}
           />
       
-          {/* 1. Trends Over Time */}
           <div className="grid gap-8 grid-cols-1 lg:grid-cols-2">
             <ChartSection title="EVs by Model Year">
               <YearlyTrendChart data={filteredData} />
@@ -151,7 +89,7 @@ function Dashboard() {
             </ChartSection>
           </div>
       
-          {/* 5. Legislative Data */}
+         
           <div className="grid gap-8 grid-cols-1 lg:grid-cols-2">
             <ChartSection title="EVs by Legislative District">
               <TopLegislativeDistrictsChart data={filteredData} />
