@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MainPage from "./pages/MainPage.jsx";
 import Home from "./pages/Home.jsx";
-import Dashboard from "./pages/Dashboard.jsx";
+import Dashboard from "./pages/Dashboard";
 import Insights from "./pages/Insights";
 import MapPage from "./pages/MapPage.jsx";
 import NotFound from "./pages/NotFound";
