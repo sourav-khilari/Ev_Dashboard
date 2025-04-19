@@ -64,7 +64,7 @@ function Dashboard() {
             <ChartSection title="Electric Vehicle Types (BEV vs. PHEV)">
               <VehicleTypeChart data={filteredData} />
             </ChartSection>
-            <ChartSection title="Top 5 Vehicle Makes">
+            <ChartSection title="Top Vehicle Makes">
               <TopMakesChart data={filteredData} />
             </ChartSection>
           </div>

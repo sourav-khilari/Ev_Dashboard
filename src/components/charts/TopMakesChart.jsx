@@ -1,55 +1,78 @@
+
 import React from 'react';
 import {
-    ResponsiveContainer,
-    PieChart,
-    Pie,
-    Cell,
-    Tooltip,
-    Legend,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+  Legend,
 } from 'recharts';
 
-const COLORS = ['#4f46e5', '#16a34a', '#facc15', '#ef4444', '#10b981'];
+const COLORS = ['#4f46e5', '#16a34a', '#facc15', '#ef4444', '#10b981', '#9ca3af'];
 
 function TopMakesChart({ data }) {
-    const makeCounts = data.reduce((acc, { Make }) => {
-        if (Make) acc[Make] = (acc[Make] || 0) + 1;
-        return acc;
-    }, {});
+ 
+  const makeCounts = data.reduce((acc, { Make }) => {
+    if (Make) acc[Make] = (acc[Make] || 0) + 1;
+    return acc;
+  }, {});
 
-    const sorted = Object.entries(makeCounts)
-        .map(([name, value]) => ({ name, value }))
-        .sort((a, b) => b.value - a.value)
-        .slice(0, 5);
+  
+  const allMakes = Object.entries(makeCounts)
+    .map(([name, value]) => ({ name, value }))
+    .sort((a, b) => b.value - a.value);
 
-    if (sorted.length === 0) {
-        return <p className="text-center text-sm text-red-500">No valid data to display.</p>;
-    }
+ 
+  const top5 = allMakes.slice(0, 5);
+  const othersTotal = allMakes.slice(5).reduce((sum, m) => sum + m.value, 0);
+  const chartData = othersTotal > 0
+    ? [...top5, { name: 'Others', value: othersTotal }]
+    : top5;
 
+  if (!chartData.length) {
     return (
-        <div className="w-full h-72"> {/* ✅ Set a fixed height */}
-            <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                    <Pie
-                        data={sorted}
-                        dataKey="value"
-                        nameKey="name"
-                        cx="50%"
-                        cy="50%"
-                        outerRadius={80}
-                        label={({ name, percent }) =>
-                            `${name} (${(percent * 100).toFixed(0)}%)`
-                        }
-                    >
-                        {sorted.map((entry, idx) => (
-                            <Cell key={`cell-${idx}`} fill={COLORS[idx % COLORS.length]} />
-                        ))}
-                    </Pie>
-                    <Tooltip />
-                    <Legend layout="horizontal" verticalAlign="bottom" align="center" />
-                </PieChart>
-            </ResponsiveContainer>
-        </div>
+      <p className="text-center text-sm text-red-500">
+        No valid data to display.
+      </p>
     );
+  }
+
+  return (
+    <div className="w-full h-72">
+      <ResponsiveContainer width="100%" height="100%">
+        <PieChart>
+          <Pie
+            data={chartData}
+            dataKey="value"
+            nameKey="name"
+            cx="50%"
+            cy="50%"
+            outerRadius={80}
+            
+            labelLine={{ stroke: '#888', strokeWidth: 1 }}
+            label={({ name, percent }) =>
+              `${name} (${(percent * 100).toFixed(0)}%)`
+            }
+          >
+            {chartData.map((entry, idx) => (
+              <Cell
+                key={`cell-${idx}`}
+                fill={COLORS[idx % COLORS.length]}
+              />
+            ))}
+          </Pie>
+          <Tooltip />
+          <Legend
+            layout="horizontal"
+            verticalAlign="bottom"
+            align="center"
+            wrapperStyle={{ fontSize: '12px', marginTop: '8px' }}
+          />
+        </PieChart>
+      </ResponsiveContainer>
+    </div>
+  );
 }
 
 export default TopMakesChart;
