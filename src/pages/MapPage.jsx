@@ -57,8 +57,8 @@ function MapPage() {
   const getColor = (count) => {
     if (!count || count <= 1) return "#4567b7";
     if (count < 5) return "#2f4fbf";
-    if (count < 20) return "#1a3daf"; 
-    if (count < 50) return "#0f1f5f"; 
+    if (count < 20) return "#1a3daf";
+    if (count < 50) return "#0f1f5f";
     return "#0f1f6c";
   };
 
