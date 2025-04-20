@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
-function Navbar() {
+function NavBar() {
     const [menuOpen, setMenuOpen] = useState(false);
 
     const navLinkClasses = ({ isActive }) =>
@@ -62,4 +62,4 @@ function Navbar() {
     );
 }
 
-export default Navbar;
+export default NavBar;
