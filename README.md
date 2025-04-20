@@ -18,7 +18,7 @@ Explore electric vehicle (EV) registration data across Washington state with thi
 **Setup & Installation:**  
 1. **Clone the repo**  
    ```bash
-   git clone https://github.com/your-username/ev-dashboard.git
+   git clone https://github.com/sourav-khilari/ev-dashboard.git
    cd ev-dashboard
 Install dependencies
 npm install
