@@ -9,12 +9,12 @@ import {
 } from 'recharts';
 
 function YearlyTrendChart({ data }) {
-  
+  //cont each year
   const yearCounts = data.reduce((acc, { 'Model Year': year }) => {
     if (year) acc[year] = (acc[year] || 0) + 1;
     return acc;
   }, {});
-
+  //data for chart
   const chartData = Object.entries(yearCounts)
     .map(([year, count]) => ({ year, count }))
     .sort((a, b) => a.year - b.year);

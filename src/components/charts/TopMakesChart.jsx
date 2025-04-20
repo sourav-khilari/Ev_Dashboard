@@ -29,7 +29,7 @@ const renderMobileLabel = ({ cx, cy, midAngle, outerRadius, percent, index, name
     </text>
   );
 };
-
+//give count of each make
 function TopMakesChart({ data }) {
   const makeCounts = data.reduce((acc, { Make }) => {
     if (Make) acc[Make] = (acc[Make] || 0) + 1;

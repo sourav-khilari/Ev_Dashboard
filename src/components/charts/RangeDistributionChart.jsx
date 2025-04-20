@@ -5,6 +5,7 @@ function RangeDistributionChart({ data }) {
     if (!data || data.length === 0) {
         return <p className="text-center text-sm text-red-500">No valid data to display.</p>;
     }
+    
     const buckets = [0, 50, 100, 150, 200, 250, 300];
     const bucketCounts = buckets.map((start, idx) => {
         const end = buckets[idx + 1] || Infinity;

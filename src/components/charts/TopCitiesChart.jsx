@@ -10,6 +10,7 @@ import {
 } from "recharts";
 
 function TopCitiesChart({ data }) {
+    //count city
     const counts = data.reduce((acc, row) => {
         const city = row.City?.trim();
         if (city) acc[city] = (acc[city] || 0) + 1;
