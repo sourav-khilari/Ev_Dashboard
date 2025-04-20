@@ -9,23 +9,59 @@ import {
 
 const COLORS = ["#10b981", "#f87171", "#fbbf24", "#6366f1"];
 
+const FRIENDLY_LABELS = {
+    "Clean Alternative Fuel Vehicle Eligible": "Eligible",
+    "Not eligible due to low battery range": "Not Eligible",
+    "Eligibility unknown as battery range has not been researched": "Pending",
+};
+
+const renderMobileLabel = ({
+    cx, cy, midAngle, outerRadius, percent, name
+}) => {
+    const RAD = Math.PI / 180;
+    const r = outerRadius + 12;
+    const x = cx + r * Math.cos(-midAngle * RAD);
+    const y = cy + r * Math.sin(-midAngle * RAD);
+    const text = FRIENDLY_LABELS[name] || name;
+
+    return (
+        <text
+            x={x}
+            y={y}
+            fill="#374151"
+            fontSize={9}
+            fontWeight="500"
+            textAnchor={x > cx ? "start" : "end"}
+            dominantBaseline="central"
+        >
+            {`${text} ${Math.round(percent * 100)}%`}
+        </text>
+    );
+};
+
+
+const renderDesktopLabel = ({ name, percent }) => {
+    const text = FRIENDLY_LABELS[name] || name;
+    const truncated = text.length > 20
+        ? text.slice(0, 12) + "…"
+        : text;
+    return `${truncated} ${Math.round(percent * 100)}%`;
+};
+
 function CafvEligibilityChart({ data }) {
     const key = "Clean Alternative Fuel Vehicle (CAFV) Eligibility";
 
     const counts = data.reduce((acc, row) => {
-        const status = row[key]?.trim();
-        if (status) {
-            acc[status] = (acc[status] || 0) + 1;
-        }
+        const s = row[key]?.trim();
+        if (s) acc[s] = (acc[s] || 0) + 1;
         return acc;
     }, {});
 
     const chartData = Object.entries(counts).map(([name, value]) => ({
-        name,
-        value,
+        name, value
     }));
 
-    if (chartData.length === 0) {
+    if (!chartData.length) {
         return (
             <div className="text-center py-10 text-gray-500">
                 No CAFV eligibility data available.
@@ -33,41 +69,32 @@ function CafvEligibilityChart({ data }) {
         );
     }
 
-
-    const renderLabel = ({ name, percent }) => {
-        const truncated = name.length > 20 ? name.slice(0, 12) + "..." : name;
-        return `${truncated} (${(percent * 100).toFixed(0)}%)`;
-    };
-
     return (
-        <div className="flex flex-col items-center space-y-4 w-full">
-            <div className="w-full max-w-[690px] h-[300px]">
+        <div className="w-full px-2 overflow-x-hidden flex flex-col items-center space-y-4">
+            {/* Desktop */}
+            <div className="hidden sm:block w-full max-w-[690px] h-[350px]">
                 <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
+                    <PieChart margin={{ top: 8, right: 16, bottom: 8, left: 16 }}>
                         <Pie
                             data={chartData}
                             dataKey="value"
                             nameKey="name"
-                            cx="50%"
-                            cy="50%"
-                            innerRadius={60}
-                            outerRadius={90}
-                            label={renderLabel}
-                            labelLine={true}
+                            cx="50%" cy="50%"
+                            innerRadius={50}
+                            outerRadius={80}
+                            label={renderDesktopLabel}
+                            labelLine
                         >
-                            {chartData.map((entry, idx) => (
-                                <Cell
-                                    key={`cell-${idx}`}
-                                    fill={COLORS[idx % COLORS.length]}
-                                />
+                            {chartData.map((e, i) => (
+                                <Cell key={i} fill={COLORS[i % COLORS.length]} />
                             ))}
                         </Pie>
                         <Tooltip
                             contentStyle={{
                                 backgroundColor: "#fff",
                                 border: "1px solid #e5e7eb",
-                                borderRadius: "8px",
-                                boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                                borderRadius: "6px",
+                                boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
                             }}
                             wrapperStyle={{ zIndex: 10 }}
                             cursor={{ fill: "transparent" }}
@@ -76,19 +103,45 @@ function CafvEligibilityChart({ data }) {
                 </ResponsiveContainer>
             </div>
 
-
-            <div className="flex flex-wrap justify-center gap-4 text-sm px-2">
-                {chartData.map((entry, idx) => (
-                    <div
-                        key={entry.name}
-                        className="flex items-center space-x-2 max-w-[160px]"
-                    >
-                        <span
-                            className="w-4 h-4 rounded-full inline-block"
-                            style={{ backgroundColor: COLORS[idx % COLORS.length] }}
+            <div className="block sm:hidden w-full h-[240px]">
+                <ResponsiveContainer width="100%" height="100%">
+                    <PieChart margin={{ top: 8, right: 32, bottom: 8, left: 8 }}>
+                        <Pie
+                            data={chartData}
+                            dataKey="value"
+                            nameKey="name"
+                            cx="45%"
+                            cy="50%"
+                            innerRadius={40}
+                            outerRadius={65}
+                            label={renderMobileLabel}
+                            labelLine
+                        >
+                            {chartData.map((e, i) => (
+                                <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                            ))}
+                        </Pie>
+                        <Tooltip
+                            contentStyle={{
+                                backgroundColor: "#fff",
+                                border: "1px solid #e5e7eb",
+                                borderRadius: "6px",
+                            }}
+                            wrapperStyle={{ zIndex: 10 }}
                         />
-                        <span className="text-gray-700 dark:text-gray-200 whitespace-normal break-words">
-                            {entry.name}
+                    </PieChart>
+                </ResponsiveContainer>
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-3 text-sm px-2">
+                {chartData.map((e, i) => (
+                    <div key={e.name} className="flex items-center space-x-2 max-w-[120px]">
+                        <span
+                            className="w-3 h-3 rounded-full inline-block"
+                            style={{ backgroundColor: COLORS[i % COLORS.length] }}
+                        />
+                        <span className="text-gray-700 dark:text-gray-200 text-xs whitespace-normal break-words">
+                            {e.name}
                         </span>
                     </div>
                 ))}
@@ -96,4 +149,5 @@ function CafvEligibilityChart({ data }) {
         </div>
     );
 }
+
 export default CafvEligibilityChart;
