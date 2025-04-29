@@ -1,4 +1,4 @@
-# ⚡ EV Dashboard – Washington State Electric Vehicle Explorer
+# ⚡ EV Dashboard 
 
 Explore electric vehicle (EV) registration data across Washington state with this interactive, filterable, mobile‑friendly map dashboard. Visualize EV distribution by city, filter by make and model year, and uncover adoption hotspots.
 
